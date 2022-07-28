@@ -162,7 +162,7 @@ const App = () => {
           <hr />
           <FlexDiv style={{alignItems:'center'}}>
             <div>
-              {todoLists.filter(list=>list.date === date.toDateString())} 
+              {todoLists.filter(list=>list.date === date.toDateString()).length} 
               TASK
             </div>
             <Button endIcon={<AddIcon />} onClick={onModalOpen}>ADD NEW</Button>
