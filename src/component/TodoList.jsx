@@ -1,11 +1,9 @@
 import React from 'react';
-import { Paper, Checkbox, FormControlLabel, IconButton, Button } from '@mui/material';
-import SportsBarOutlinedIcon from '@mui/icons-material/SportsBarOutlined';
-import SportsBarIcon from '@mui/icons-material/SportsBar';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Paper, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import styled from 'styled-components';
+import ListItem from './ListItem';
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,10 +31,6 @@ const DayText = styled.div`
 const DateText = styled.div`
   padding-bottom: 4px;
 `;
-const TodoItemContainer = styled(FlexDiv)`
-  text-decoration: ${props => props.done ? 'line-through' : 'none'};
-  color: ${props => props.done ? '#1976d2' : 'black'};
-`;
 
 const TodoList = (props) => {
   const { date, todoLists, onTodoToggle, onTodoDelete, onModalOpen } = props;
@@ -53,27 +47,7 @@ const TodoList = (props) => {
       <hr />
       <div style={{height:'360px'}}>
         {todoLists.length !== 0 ? todoLists.filter(list=> list.date === date.toDateString()).map(list => (
-          <TodoItemContainer 
-            done={list.done}
-            key={list.id}
-          > 
-            <FormControlLabel 
-              label={list.todo} 
-              control={
-                <Checkbox 
-                  checked={list.done}
-                  onChange={()=>onTodoToggle(list.id)} // 투두리스트 확인 클릭 이벤트
-                  icon={<SportsBarOutlinedIcon />} 
-                  checkedIcon={<SportsBarIcon />} 
-                />
-              }
-            />
-            <IconButton
-              onClick={()=>onTodoDelete(list.id)} // 삭제 이벤트
-            > 
-              <DeleteIcon />
-            </IconButton>
-          </TodoItemContainer>
+          <ListItem list={list} onTodoToggle={onTodoToggle} onTodoDelete={onTodoDelete} />
         )) : null}
       </div>
       <hr />
