@@ -17,7 +17,7 @@ const DialogContainer = (props) => {
     >
       <InputModal>
         <div style={{paddingBottom: '10px', paddingTop: '10px'}}>
-          새로운 Todo를 입력하세요
+          새로운 Todo를 입력하세요 test
         </div>
         <div style={{paddingBottom: '10px'}}>{date.toDateString().slice(4)}</div>
         <TextField type="text" value={todoText} onChange={onTodoTextChange} size='small' fullWidth/>

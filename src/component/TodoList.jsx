@@ -54,7 +54,7 @@ const TodoList = (props) => {
       <FlexDiv style={{alignItems:'center'}}>
         <div>
           {todoLists.filter(list=>list.date === date.toDateString()).length} 
-          TASK
+          test
         </div>
         <Button endIcon={<AddIcon />} onClick={onModalOpen}>ADD NEW</Button>
       </FlexDiv>
