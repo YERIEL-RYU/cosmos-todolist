@@ -76,14 +76,55 @@ const App = () => {
   return (
     <>
       <Container>
-        <Calendar date={date} onDateChange={onDateChange} />
-        <TodoList 
-          date={date}
-          todoLists={todoLists}
-          onTodoToggle={onTodoToggle}
-          onTodoDelete={onTodoDelete}
-          onModalOpen={onModalOpen}
-        />
+        <PaperContainer square elevation={3}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <CalendarPicker date={date} onChange={(newDate) => onDateChange(newDate)} />
+          </LocalizationProvider>    
+        </PaperContainer>
+        <TodoContainer square elevation={3}>
+          <Title>
+            <DayText>
+              {date.toDateString().split(' ')[0]}
+            </DayText>
+            <DateText>
+              {date.toDateString().slice(4)}
+            </DateText>
+          </Title>
+          <hr />
+          <div style={{height:'360px'}}>
+            {todoLists.length !== 0 ? todoLists.filter(list=> list.date === date.toDateString()).map(list => (
+              <TodoItemContainer 
+                done={list.done}
+                key={list.id}
+              > 
+                <FormControlLabel 
+                  label={list.todo} 
+                  control={
+                    <Checkbox 
+                      checked={list.done}
+                      onChange={} // 투두리스트 확인 클릭 이벤트
+                      icon={<SportsBarOutlinedIcon />} 
+                      checkedIcon={<SportsBarIcon />} 
+                    />
+                  }
+                />
+                <IconButton
+                  onClick={} // 삭제 이벤트
+                > 
+                  <DeleteIcon />
+                </IconButton>
+              </TodoItemContainer>
+            )) : null}
+          </div>
+          <hr />
+          <FlexDiv style={{alignItems:'center'}}>
+            <div>
+              {todoLists.filter(list=>list.date === date.toDateString()).length} 
+              TASK
+            </div>
+            <Button endIcon={<AddIcon />} onClick={onModalOpen}>ADD NEW</Button>
+          </FlexDiv>
+        </TodoContainer>  
       </Container>
       <DialogContainer 
         modal={modal}
